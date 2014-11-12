@@ -12,5 +12,15 @@
         hello world! <strong>{{ boldmessage }}</strong><br />
         <a href="/rango/about">About</a><br />
         <img src="{% static "images/oct.jpg" %}" alt="Picture of Rango" />
+
+        {% if categories %}
+            <ul>
+                {% for category in categories %}
+                <li>{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
     </body>
 </html>
