@@ -17,6 +17,7 @@ def about(request):
     context_dict = {'boldmessage': "About..."}
     return render(request, 'rango/about.html', context_dict) 
 
+@login_required
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
