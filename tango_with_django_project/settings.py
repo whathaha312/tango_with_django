@@ -88,3 +88,8 @@ STATICFILES_DIRS = ( STATIC_PATH, )
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = [ TEMPLATE_PATH, ]
 #TEMPLATE_DIRS = [ '/home/za/dev/github/tango_with_django/tango_with_django_project' ]
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
