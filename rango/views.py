@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
-#from django.template import render
+#from django.template import render # this one from the tutorial
 from django.shortcuts import render
-from rango.models import Category
+from rango.models import Category, Page
 from rango.forms import CategoryForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -16,6 +16,18 @@ def about(request):
 #    return HttpResponse("Rango says here is the about page. <a href='/rango'>index</a>")
     context_dict = {'boldmessage': "About..."}
     return render(request, 'rango/about.html', context_dict) 
+
+def category(request, category_name_slug):
+    context_dict = {}
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        context_dict['category_name'] = category.name
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        pass
+    return render(request, 'rango/category.html', context_dict)
 
 @login_required
 def add_category(request):
