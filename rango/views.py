@@ -32,6 +32,10 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 def register(request):
+    if request.session.test_cookie_worked():
+        print ">>> TEST COOKIE WORKED!"
+        request.session.delete_test_cookie()    
+
     registered = False
 
     if request.method == 'POST':
